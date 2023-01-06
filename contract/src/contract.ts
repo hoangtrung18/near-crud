@@ -34,4 +34,14 @@ class NearCrud {
       );
     }
   }
+
+  @call({}) // This method changes the state, for which it cost gas
+  update_student(payload: { index: number; update: Student }): void {
+    this.students = this.students.map((s) => {
+      if (s.index == payload.index) {
+        return new Student(payload.update);
+      }
+      return s;
+    });
+  }
 }
