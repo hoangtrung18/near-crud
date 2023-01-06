@@ -21,25 +21,25 @@ class NearCrud {
   }
 
   @call({}) // This method changes the state, for which it cost gas
-  create_student(student: { name: string; score: number }): void {
-    this.students.push(new Student({ ...student, index: this.index }));
+  create_student({ name, score }: { name: string; score: number }): void {
+    this.students.push(new Student({ name, score, index: this.index }));
     this.index += 1;
   }
 
   @call({}) // This method changes the state, for which it cost gas
-  remove_student(payload: { index: number }): void {
-    if (this.students.length > payload.index) {
+  remove_student({ index }: { index: number }): void {
+    if (this.students.length > index) {
       this.students = this.students.filter(
-        (student) => student.index !== payload.index
+        (student) => student.index !== index
       );
     }
   }
 
   @call({}) // This method changes the state, for which it cost gas
-  update_student(payload: { index: number; update: Student }): void {
+  update_student({ index, update }: { index: number; update: Student }): void {
     this.students = this.students.map((s) => {
-      if (s.index == payload.index) {
-        return new Student(payload.update);
+      if (s.index == index) {
+        return new Student(update);
       }
       return s;
     });
