@@ -1,18 +1,24 @@
 // Find all our documentation at https://docs.near.org
 import { NearBindgen, near, call, view } from "near-sdk-js";
-
+class Student {
+  name: string;
+  score: number;
+  constructor(payload: any) {
+    this.name = payload.name;
+    this.score = payload.score;
+  }
+}
 @NearBindgen({})
 class NearCrud {
-  message: string = "Hello";
+  students: Student[] = [];
 
   @view({}) // This method is read-only and can be called for free
-  get_greeting(): string {
-    return this.message;
+  get_student(): Student[] {
+    return this.students;
   }
 
   @call({}) // This method changes the state, for which it cost gas
-  set_greeting({ message }: { message: string }): void {
-    near.log(`Saving greeting ${message}`);
-    this.message = message;
+  create_student(student: { name: string; score: number }): void {
+    this.students.push(new Student(student));
   }
 }
