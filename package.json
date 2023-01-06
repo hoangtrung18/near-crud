@@ -1,0 +1,17 @@
+{
+  "name": "near-crud",
+  "version": "1.0.0",
+  "license": "(MIT AND Apache-2.0)",
+  "scripts": {
+    "deploy": "cd contract && npm run deploy",
+    "build": "npm run build:contract && npm run build:web",
+    "build:contract": "cd contract && npm run build",
+    "test": "npm run test:unit && npm run test:integration",
+    "test:unit": "cd contract && npm test",
+    "test:integration": "cd integration-tests && npm test -- -- \"./contract/build/hello_near.wasm\""
+  },
+  "devDependencies": {
+    "near-cli": "^3.3.0"
+  },
+  "dependencies": {}
+}
