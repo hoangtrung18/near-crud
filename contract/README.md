@@ -32,27 +32,29 @@ cat ./neardev/dev-account
 
 <br />
 
-## 2. Retrieve the Greeting
+## 2. Retrieve the Create student
 
-`get_greeting` is a read-only method (aka `view` method).
+`create_student` is a call method.
+`Call` methods can only be invoked using a NEAR account, since the account needs to pay GAS for the transaction.
+
+```bash
+# Use near-cli to get the greeting
+near view <dev-account> create_student '{"name": "Alice", "score": 8}' --accountId <dev-account>
+```
+
+<br />
+
+<br />
+
+## 3. Retrieve the view students
+
+`get_student` is a view method.
 
 `View` methods can be called for **free** by anyone, even people **without a NEAR account**!
 
 ```bash
 # Use near-cli to get the greeting
-near view <dev-account> get_greeting
-```
-
-<br />
-
-## 3. Store a New Greeting
-`set_greeting` changes the contract's state, for which it is a `call` method.
-
-`Call` methods can only be invoked using a NEAR account, since the account needs to pay GAS for the transaction.
-
-```bash
-# Use near-cli to set a new greeting
-near call <dev-account> set_greeting '{"greeting":"howdy"}' --accountId <dev-account>
+near view <dev-account> get_student
 ```
 
 **Tip:** If you would like to call `set_greeting` using your own account, first login into NEAR using:
@@ -63,3 +65,4 @@ near login
 ```
 
 and then use the logged account to sign the transaction: `--accountId <your-account>`.
+<br />
